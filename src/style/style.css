@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* 在这里定义你的专属颜色 */
+@theme {
+  --color-chic-red: #CE1141;
+}
+
+/* 全局样式 */
+body {
+  background-color: #000000;
+  color: #ffffff;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
