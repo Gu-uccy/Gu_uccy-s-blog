@@ -68,32 +68,41 @@ const hobbies = [
   },
 ]
 
-// 滚动视差效果
 const initScrollParallax = () => {
-const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: containerRef.value,
-      start: "top bottom",
-      end: "center center",
-      scrub: 1,
-    }
-  })
-  tl.to('.hobbies-title', { y: -80, ease: 'none' }, 0)
-  tl.to('.perspective-container', { y: -80, ease: 'none' }, 0)
-  const cards = gsap.utils.toArray('.hobby-card')
-  cards.forEach((card, i) => {
-    const xSpread = (i - 1.5) * 200
-    const ySpread = i % 2 === 0 ? 80 : 30
-    const zSpread = i % 2 === 0 ? 150 : -100
-    const rotateYSpread = (i - 1.5) * 20
-    tl.from(card, {
-      x: xSpread,
-      yPercent: ySpread,
-      z: zSpread,
-      rotationY: rotateYSpread,
-      ease: 'power1.out'
-    }, 0)
-  })
+  let mm = gsap.matchMedia();
+  mm.add({
+    isDesktop: "(min-width: 768px)",
+    isMobile: "(max-width: 767px)"
+  }, (context) => {
+    let { isDesktop } = context.conditions;
+    const spreadFactor = isDesktop ? 200 : 60;
+    const zFactor = isDesktop ? 150 : 40;
+    const yFactor = isDesktop ? 80 : 30;
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.value,
+        start: "top bottom",
+        end: "center center",
+        scrub: 1,
+      }
+    })
+    tl.to('.hobbies-title', { y: isDesktop ? -80 : -40, ease: 'none' }, 0)
+    tl.to('.perspective-container', { y: isDesktop ? -80 : -40, ease: 'none' }, 0)
+    const cards = gsap.utils.toArray('.hobby-card')
+    cards.forEach((card, i) => {
+      const xSpread = (i - 1.5) * spreadFactor
+      const ySpread = i % 2 === 0 ? yFactor : (yFactor * 0.4)
+      const zSpread = i % 2 === 0 ? zFactor : -zFactor
+      const rotateYSpread = (i - 1.5) * (isDesktop ? 20 : 10)
+      tl.from(card, {
+        x: xSpread,
+        yPercent: ySpread,
+        z: zSpread,
+        rotationY: rotateYSpread,
+        ease: 'power1.out'
+      }, 0)
+    })
+  });
 }
 
 // 悬停交互
@@ -276,12 +285,11 @@ onUnmounted(() => {
         <div class="text-[10px] font-mono text-gray-500 mt-2 tracking-[0.5em] opacity-60">CLICK_TO_PLAY</div>
     </div>
 
-    <div class="flex items-end justify-center -space-x-24 md:-space-x-36 pb-12 perspective-container z-10">
-
+    <div class="flex items-center justify-center -space-x-12 sm:-space-x-20 md:-space-x-36 pt-24 pb-12 perspective-container z-30 w-full">
         <div
           v-for="(item, index) in hobbies"
           :key="item.id"
-          class="hobby-card w-75 md:w-[320px] aspect-2/3 relative cursor-pointer group bg-[#0a0a0a] rounded-xl will-change-transform"
+          class="hobby-card w-35 sm:w-50 md:w-[320px] aspect-2/3 relative cursor-pointer group bg-[#0a0a0a] rounded-xl will-change-transform"
           @mouseenter="(e) => handleMouseEnter(e, index)"
           @mouseleave="(e) => handleMouseLeave(e, index)"
           @mousemove="handleMouseMove"
