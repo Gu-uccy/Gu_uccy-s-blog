@@ -277,7 +277,7 @@ onUnmounted(() => {
         </div>
     </div>
 
-    <div class="hobbies-title mb-24 text-center z-10 pointer-events-none">
+    <div class="hobbies-title mb-24 text-center z-10 pointer-events-none top-1">
         <h2 class="text-5xl md:text-7xl font-black italic tracking-tighter mix-blend-difference cursor-default pointer-events-auto group">
             <span class="text-chic-red mr-2">MY</span>
             <span class="text-stroke text-transparent transition-colors duration-200 group-hover:text-white">HOBBIES</span>
