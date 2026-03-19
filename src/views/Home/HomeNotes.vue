@@ -2,10 +2,12 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useBGM } from "@/composables/useBGM";
 
 gsap.registerPlugin(ScrollTrigger)
 
 const deskRef = ref(null)
+useBGM('notes', deskRef)
 let ctx
 
 // notes数据

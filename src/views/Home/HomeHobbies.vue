@@ -131,10 +131,17 @@ const handleMouseLeave = (e, index) => {
   const card = e.currentTarget
   gsap.set(card, { zIndex: 10 })
 
+  if (card._q) {
+    card._q.rotX(0)
+    card._q.rotY(0)
+    card._q.imgX(0)
+    card._q.imgY(0)
+    card._q.contX(0)
+    card._q.contY(0)
+  }
+
   gsap.to(card, {
     rotation: hobbies[index].initialRotation,
-    rotationX: 0,
-    rotationY: 0,
     y: hobbies[index].yOffset,
     scale: 1,
     clearProps: "boxShadow",
@@ -147,12 +154,10 @@ const handleMouseLeave = (e, index) => {
   })
 
   const imgLayer = card.querySelector('.img-layer')
-  const contentLayer = card.querySelector('.content-layer')
-  gsap.to([imgLayer, contentLayer], {
-    x: 0,
-    y: 0,
+  gsap.to(imgLayer, {
     scale: 1,
     duration: 0.5,
+    ease: 'power2.out',
     overwrite: 'auto'
   })
 }
