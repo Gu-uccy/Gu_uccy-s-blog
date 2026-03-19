@@ -86,7 +86,7 @@ const initScrollParallax = () => {
         scrub: 1,
       }
     })
-    tl.to('.hobbies-title', { y: isDesktop ? -80 : -40, ease: 'none' }, 0)
+    tl.to('.hobbies-title', { y: isDesktop ? -40 : -20, ease: 'none' }, 0)
     tl.to('.perspective-container', { y: isDesktop ? -80 : -40, ease: 'none' }, 0)
     const cards = gsap.utils.toArray('.hobby-card')
     cards.forEach((card, i) => {
@@ -277,7 +277,7 @@ onUnmounted(() => {
         </div>
     </div>
 
-    <div class="hobbies-title mb-24 text-center z-10 pointer-events-none top-1">
+    <div class="hobbies-title mb-24 text-center z-10 pointer-events-none top-0">
         <h2 class="text-5xl md:text-7xl font-black italic tracking-tighter mix-blend-difference cursor-default pointer-events-auto group">
             <span class="text-chic-red mr-2">MY</span>
             <span class="text-stroke text-transparent transition-colors duration-200 group-hover:text-white">HOBBIES</span>
